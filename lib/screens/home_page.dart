@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../widget/custom_card.dart';
+
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
   static String id = 'homePAge';
@@ -25,65 +27,18 @@ class HomePage extends StatelessWidget {
           style: TextStyle(color: Colors.black),
         ),
       ),
-      body: Center(
-        child: Stack(
-          clipBehavior: Clip.none,
-          children: [
-            Container(
-              height: 130,
-              width: 220,
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                      blurRadius: 40,
-                      color: Colors.grey.withOpacity(.2),
-                      spreadRadius: 0,
-                      offset: const Offset(8, 8)),
-                ],
-              ),
-              child: const Card(
-                elevation: 10,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Hand Bag Lv',
-                        style: TextStyle(color: Colors.grey, fontSize: 14),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            r'$225',
-                            style: TextStyle(color: Colors.grey, fontSize: 14),
-                          ),
-                          Icon(
-                            Icons.favorite,
-                            color: Colors.red,
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              right: 32,
-              top: -65,
-              child: Image.network(
-                'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
-                height: 100,
-              ),
-            ),
-          ],
-        ),
+      body: Padding(
+        padding: const EdgeInsets.only(left: 16, right: 16, top: 65),
+        child: GridView.builder(
+            clipBehavior: Clip.none,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 1.3,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 100),
+            itemBuilder: (context, index) {
+              return const CustomCard();
+            }),
       ),
     );
   }

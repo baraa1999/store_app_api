@@ -1,67 +1,85 @@
 import 'package:flutter/material.dart';
+import 'package:store_app_api/models/product_model.dart';
+import 'package:store_app_api/screens/update_product.dart';
 
 class CustomCard extends StatelessWidget {
-  const CustomCard({
-    super.key,
-  });
+  CustomCard({
+    required this.product,
+    Key? key,
+  }) : super(key: key);
 
+  ProductModel product;
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      clipBehavior: Clip.none,
-      children: [
-        Container(
-          decoration: BoxDecoration(
-            boxShadow: [
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, UpdateProduct.id, arguments: product);
+      },
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          Container(
+            decoration: BoxDecoration(boxShadow: [
               BoxShadow(
-                  blurRadius: 50,
-                  color: Colors.grey.withOpacity(.2),
-                  spreadRadius: 0,
-                  offset: const Offset(8, 8)),
-            ],
-          ),
-          child: const Card(
-            elevation: 10,
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Hand Bag Lv',
-                    style: TextStyle(color: Colors.grey, fontSize: 14),
-                  ),
-                  SizedBox(
-                    height: 3,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        r'$225',
-                        style: TextStyle(color: Colors.grey, fontSize: 14),
+                blurRadius: 50,
+                color: Colors.grey.withOpacity(.1),
+                spreadRadius: 20,
+                offset: const Offset(10, 10),
+              ),
+            ]),
+            child: Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+              elevation: 10,
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      product.title.substring(0, 6),
+                      style: const TextStyle(
+                        color: Colors.grey,
+                        fontSize: 16,
                       ),
-                      Icon(
-                        Icons.favorite,
-                        color: Colors.red,
-                      ),
-                    ],
-                  )
-                ],
+                    ),
+                    const SizedBox(
+                      height: 3,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          r'$' '${product.price.toString()}',
+                          style: const TextStyle(
+                            fontSize: 16,
+                          ),
+                        ),
+                        const Icon(
+                          Icons.favorite,
+                          color: Colors.red,
+                        ),
+                      ],
+                    )
+                  ],
+                ),
               ),
             ),
           ),
-        ),
-        Positioned(
-          right: 32,
-          top: -60,
-          child: Image.network(
-            'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
-            height: 100,
-          ),
-        ),
-      ],
+          Positioned(
+            right: 32,
+            top: -60,
+            child: Image.network(
+              product.image,
+              height: 100,
+              width: 100,
+            ),
+          )
+        ],
+      ),
     );
   }
 }

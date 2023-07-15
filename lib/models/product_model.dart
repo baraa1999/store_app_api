@@ -1,23 +1,26 @@
 class ProductModel {
-  final int id;
+  final dynamic id;
   final String title;
   final double price;
   final String description;
   final String image;
   final RatingModel rate;
-  ProductModel({
-    required this.id,
-    required this.title,
-    required this.price,
-    required this.description,
-    required this.image,
-    required this.rate,
-  });
+  final String category;
+
+  ProductModel(
+      {required this.id,
+      required this.title,
+      required this.price,
+      required this.description,
+      required this.image,
+      required this.rate,
+      required this.category});
 
   factory ProductModel.fromJson(jsonData) {
     return ProductModel(
         id: jsonData['id'],
         title: jsonData['title'],
+        category: jsonData['category'],
         price: jsonData['price'],
         description: jsonData['description'],
         image: jsonData['image'],

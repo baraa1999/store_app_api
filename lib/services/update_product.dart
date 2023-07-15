@@ -7,15 +7,17 @@ class UpdateProductServices {
       required String price,
       required String description,
       required String image,
+      required int id,
       required String category}) async {
+    print('product id = $id');
     Map<String, dynamic> data = await Api().put(
-      url: 'https://fakestoreapi.com/products',
+      url: 'https://fakestoreapi.com/products/$id',
       body: {
         'title': title,
         'price': price,
         'description': description,
         'image': image,
-        'category': category
+        'category': category,
       },
     );
     return ProductModel.fromJson(data);

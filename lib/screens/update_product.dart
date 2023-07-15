@@ -73,11 +73,11 @@ class _UpdateProductPageState extends State<UpdateProductPage> {
                   const SizedBox(height: 50),
                   CustomButon(
                     text: 'update',
-                    onTap: () {
+                    onTap: () async {
                       isLoading = true;
                       setState(() {});
                       try {
-                        updateProduct(product);
+                        await updateProduct(product);
                         print('success');
                       } catch (e) {
                         isLoading = false;
@@ -95,13 +95,13 @@ class _UpdateProductPageState extends State<UpdateProductPage> {
     );
   }
 
-  void updateProduct(ProductModel product) {
-    UpdateProductServices().updateProduct(
-        title: productName!,
-        price: price!,
-        description: desc!,
-        image: img!,
+  Future<void> updateProduct(ProductModel product) async {
+    await UpdateProductServices().updateProduct(
+        id: product.id,
+        title: productName == null ? product.title : productName!,
+        price: price == null ? product.price.toString() : price!,
+        description: desc == null ? product.description : desc!,
+        image: img == null ? product.image : img!,
         category: product.category);
-    isLoading = false;
   }
 }

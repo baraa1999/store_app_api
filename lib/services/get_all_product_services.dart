@@ -1,16 +1,17 @@
 import 'package:store_app_api/helper/api.dart';
 import 'package:store_app_api/models/product_model.dart';
 
-class AllProductServices {
+class AllProductsService {
   Future<List<ProductModel>> getAllProducts() async {
     List<dynamic> data =
         (await Api().get(url: 'https://fakestoreapi.com/products')) as List;
-    List<ProductModel> productList = [];
+
+    List<ProductModel> productsList = [];
     for (int i = 0; i < data.length; i++) {
-      productList.add(
+      productsList.add(
         ProductModel.fromJson(data[i]),
       );
     }
-    return productList;
+    return productsList;
   }
 }

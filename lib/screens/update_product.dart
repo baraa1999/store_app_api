@@ -23,33 +23,44 @@ class UpdateProduct extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const SizedBox(
-                height: 100,
-              ),
-              CustomTextField(
-                onChanged: (data) {
-                  productName = data;
-                },
-                hintText: 'Product Name',
-              ),
-              const SizedBox(height: 10),
-              CustomTextField(
-                hintText: 'description',
-              ),
-              const SizedBox(height: 10),
-              CustomTextField(
-                hintText: 'Price',
-              ),
-              const SizedBox(height: 10),
-              CustomTextField(
-                hintText: 'image',
-              ),
-              const SizedBox(height: 50),
-              CustomButon(text: 'update'),
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 100,
+                ),
+                CustomTextField(
+                  onChanged: (data) {
+                    productName = data;
+                  },
+                  hintText: 'Product Name',
+                ),
+                const SizedBox(height: 10),
+                CustomTextField(
+                  onChanged: (data) {
+                    desc = data;
+                  },
+                  hintText: 'description',
+                ),
+                const SizedBox(height: 10),
+                CustomTextField(
+                  inputType: TextInputType.number,
+                  onChanged: (data) {
+                    price = int.parse(data);
+                  },
+                  hintText: 'Price',
+                ),
+                const SizedBox(height: 10),
+                CustomTextField(
+                  onChanged: (data) {
+                    img = data;
+                  },
+                  hintText: 'image',
+                ),
+                const SizedBox(height: 50),
+                CustomButon(text: 'update'),
+              ],
+            ),
           ),
         ),
       ),

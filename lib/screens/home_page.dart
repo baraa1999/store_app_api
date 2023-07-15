@@ -37,7 +37,7 @@ class HomePage extends StatelessWidget {
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 100),
             itemBuilder: (context, index) {
-              return const CustomCard();
+              return CustomCard();
             }),
       ),
     );

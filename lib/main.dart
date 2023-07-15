@@ -14,7 +14,7 @@ class StoreApp extends StatelessWidget {
     return MaterialApp(
       routes: {
         HomePage.id: (context) => const HomePage(),
-        UpdateProduct.id: (context) => UpdateProduct(),
+        UpdateProductPage.id: (context) => UpdateProductPage(),
       },
       initialRoute: HomePage.id,
     );

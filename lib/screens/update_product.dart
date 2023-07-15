@@ -1,16 +1,19 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:store_app_api/models/product_model.dart';
 import 'package:store_app_api/widget/custom_button.dart';
 
+import '../services/update_product.dart';
 import '../widget/custom_text_field.dart';
 
-class UpdateProduct extends StatelessWidget {
-  UpdateProduct({super.key});
+class UpdateProductPage extends StatelessWidget {
+  UpdateProductPage({super.key});
   static String id = 'update product';
-  String? productName, desc, img;
-  int? price;
+  String? productName, desc, img, price;
 
   @override
   Widget build(BuildContext context) {
+    var product = ModalRoute.of(context)!.settings.arguments as ProductModel;
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -46,7 +49,7 @@ class UpdateProduct extends StatelessWidget {
                 CustomTextField(
                   inputType: TextInputType.number,
                   onChanged: (data) {
-                    price = int.parse(data);
+                    price = data;
                   },
                   hintText: 'Price',
                 ),
@@ -58,7 +61,17 @@ class UpdateProduct extends StatelessWidget {
                   hintText: 'image',
                 ),
                 const SizedBox(height: 50),
-                CustomButon(text: 'update'),
+                CustomButon(
+                  text: 'update',
+                  onTap: () {
+                    UpdateProductServices().updateProduct(
+                        title: productName!,
+                        price: price!,
+                        description: desc!,
+                        image: img!,
+                        category: product.category);
+                  },
+                ),
               ],
             ),
           ),
